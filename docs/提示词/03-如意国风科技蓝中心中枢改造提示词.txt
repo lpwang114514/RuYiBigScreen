@@ -1,0 +1,246 @@
+你是一个资深前端工程师、ECharts 可视化专家和数据大屏视觉设计师。
+
+你现在在一个 Vue 3 + TypeScript + ECharts 数据大屏项目中工作。
+
+项目英文名：RuyiBigScreen
+项目中文名：如意数据大屏
+
+项目定位：
+这是一个公开开源的教学型数据大屏项目，主要用于帮助学生和初学者从 0 到 1 学习如何自己动手制作一个完整的数据可视化大屏。
+
+本次任务目标：
+把当前数据大屏中间区域从“地图态势总览”改成“不依赖地图数据”的中心枢纽态势图，并将整体视觉风格统一为“如意国风科技蓝”。
+
+请直接执行，不要只给我方案。
+
+视觉风格：如意国风科技蓝
+
+“如意国风科技蓝”是本项目的统一视觉基线。整体要体现东方国风审美与现代科技大屏结合：
+
+- 主背景使用深蓝、墨蓝、夜空蓝。
+- 主高亮使用青蓝、湖蓝、冰蓝。
+- 辅助点缀可以使用少量玉青、鎏金色。
+- 可以加入非常克制的国风元素，例如淡山峦、云纹、水波纹、窗棂线条、卷轴式边框感。
+- 科技元素包括网格、数据流、HUD 面板、发光边框、流光线条、脉冲节点。
+- 不要做成纯古风海报。
+- 不要做成过度赛博风。
+- 页面必须保持高级、清晰、适合教学展示和开源项目截图。
+
+重要约束：
+
+1. 不要使用地图数据。
+2. 不要引入 china-map-geojson。
+3. 不要使用 ECharts map / geo 地图能力。
+4. 中心图继续使用 ECharts 实现。
+5. 不要破坏现有项目结构，优先沿用当前组件拆分方式。
+6. 修改前先阅读现有文件，尤其是：
+   - src/views/DashboardView.vue
+   - src/charts/MapOverviewChart.vue
+   - src/mocks/dashboardMock.ts
+   - src/types/dashboard.ts
+   - src/components/BasePanel.vue
+   - src/components/ScreenHeader.vue
+   - src/components/MetricCard.vue
+   - src/app/styles.css
+   - package.json
+7. 如果 package.json 或 package-lock.json 里已经引入了地图数据依赖，请移除地图相关依赖。
+8. 保持 TypeScript 类型正确。
+9. 保持 16:9 数据大屏布局，不能出现页面滚动条和内容溢出。
+10. 不要加入复杂外部依赖，优先使用 CSS 和 ECharts 自身能力完成视觉升级。
+11. 不要使用 git reset --hard、git checkout -- . 等破坏性命令。
+12. 如果发现已有未提交改动，请先阅读并理解，不要随意回滚用户已有改动。
+
+中心区域改造要求：
+
+1. 将中间面板标题从“中心态势总览”改为“如意数据中枢”。
+2. 将当前地图图表改造成不依赖地图的中心枢纽态势图。
+3. 推荐将组件重命名为 DataHubChart.vue 或 HubOverviewChart.vue，并同步更新引用。
+4. 如果暂不重命名组件，也必须清理内部地图语义，不要再出现 MapNode、mapNodes、geo、registerMap 等地图相关概念。
+5. TypeScript 类型从 MapNode 改为 HubNode 或 TopologyNode。
+6. mock 数据从地图城市经纬度改为业务节点抽象坐标。
+
+中心图视觉要求：
+
+1. 中心为醒目的“如意数据中枢”节点。
+2. 周围环绕 6 到 8 个业务节点，例如：
+   - 课程学习
+   - 项目实战
+   - 资料下载
+   - 问答互动
+   - 教师端
+   - 学员端
+   - 数据服务
+   - 告警中心
+3. 中心节点要有发光、涟漪、脉冲或光环效果。
+4. 周围节点通过动态流线与中心连接。
+5. 节点大小根据 value 值变化。
+6. 节点颜色根据 status 或 type 区分。
+7. tooltip 显示节点名称、活跃度、状态说明。
+8. 背景可以加入淡淡的国风科技纹理，例如环形星轨、山峦线、水波线、云纹线，但必须克制，不遮挡数据。
+9. 图表要有中心聚焦感，让用户第一眼看到“如意数据中枢”正在驱动周围业务节点。
+
+推荐实现方向：
+
+优先使用 ECharts effectScatter + lines + cartesian2d。
+
+实现建议：
+
+- coordinateSystem 使用 cartesian2d。
+- xAxis / yAxis 隐藏，范围 0 到 100。
+- 中心节点坐标为 [50, 50]。
+- 周围节点使用 0-100 抽象坐标环绕中心。
+- lines 表示数据链路，可以开启流光 effect。
+- effectScatter 表示周围业务节点。
+- scatter 表示中心中枢节点。
+- 可叠加一个或多个无坐标轴辅助 series，营造环形光晕或背景纹理。
+- 保留 observeResize 逻辑，确保图表随容器 resize。
+
+可选实现方向：
+
+也可以使用 ECharts graph：
+
+- layout 使用 none。
+- 节点固定 x / y 坐标。
+- 中心节点在 x=50, y=50。
+- 周围节点按环形分布。
+- links 表示数据链路。
+- edgeSymbol 可以使用 ['none', 'arrow']。
+- lineStyle 使用半透明青蓝或玉青。
+- emphasis 开启邻接高亮。
+
+如果选择 graph，请确保视觉效果足够像大屏主视觉，而不是普通关系图。
+
+整体视觉升级要求：
+
+1. src/app/styles.css：
+   - 调整全局 CSS 变量，形成如意国风科技蓝色板。
+   - 增加深蓝背景、科技网格、淡山峦或云纹层次。
+   - 保持页面无滚动。
+
+2. BasePanel.vue：
+   - 面板增加更精致的青蓝发光边框。
+   - 可以加入轻微窗棂或卷轴式角标感。
+   - 标题区域更像大屏 HUD 面板。
+   - 不要让面板装饰压过数据内容。
+
+3. ScreenHeader.vue：
+   - 标题保持居中大气。
+   - 可以加入左右流光线、状态点、淡国风纹理。
+   - 标题文案可以调整为“如意数据大屏”或“如意智能教学数据中心”。
+   - 时间显示要清晰。
+
+4. MetricCard.vue：
+   - 数字更突出。
+   - 使用青蓝发光、玉青或鎏金状态点缀。
+   - 趋势状态要清晰但不要花哨。
+
+5. 其他 ECharts 图表：
+   - 线图、柱图、饼图、雷达图统一青蓝、玉青、鎏金、浅紫灰等协调色。
+   - tooltip、legend、axis 样式要与主题一致。
+   - 不要出现和整体风格冲突的默认 ECharts 强色。
+
+数据结构建议：
+
+可以将原来的 mapNodes 改为 hubNodes，例如：
+
+```ts
+export interface HubNode {
+  id: string
+  name: string
+  value: number
+  coord: [number, number]
+  status: 'good' | 'warning' | 'danger'
+  description: string
+}
+```
+
+DashboardData 中对应字段建议改为：
+
+```ts
+hubNodes: HubNode[]
+```
+
+mock 数据示例方向：
+
+```ts
+hubNodes: [
+  {
+    id: 'course',
+    name: '课程学习',
+    value: 92,
+    coord: [50, 18],
+    status: 'good',
+    description: '课程访问与学习进度保持高活跃',
+  },
+  {
+    id: 'project',
+    name: '项目实战',
+    value: 86,
+    coord: [78, 30],
+    status: 'good',
+    description: '实战任务提交量稳定增长',
+  },
+]
+```
+
+验收标准：
+
+1. 页面中心不再显示地图。
+2. 项目不再依赖地图数据。
+3. 中间主视觉明显增强，有“如意国风科技蓝”的识别度。
+4. 页面仍然是完整 16:9 大屏，无滚动条。
+5. 文字不重叠、不溢出。
+6. ECharts 图表 resize 正常。
+7. TypeScript 类型无错误。
+8. npm run build 通过。
+9. npm run lint 通过。
+10. npm run test 通过。
+11. 如果 E2E 环境可用，运行 npm run test:e2e。
+
+验证要求：
+
+请按顺序运行：
+
+```bash
+npm run lint
+npm run test
+npm run build
+```
+
+如果 E2E 环境可用，也运行：
+
+```bash
+npm run test:e2e
+```
+
+请启动本地开发服务并实际打开浏览器检查页面：
+
+```bash
+npm run dev
+```
+
+浏览器检查内容：
+
+- 页面不是空白。
+- 标题显示正常。
+- 指标卡片显示正常。
+- 中心区域显示“如意数据中枢”，不再显示地图。
+- 中心节点和周围节点显示正常。
+- 动态流线或脉冲效果显示正常。
+- 页面没有明显布局重叠。
+- 页面没有滚动条。
+- 控制台没有严重错误。
+
+最终交付说明：
+
+完成后请告诉我：
+
+- 修改了哪些文件。
+- 中心图替代地图后的设计思路。
+- “如意国风科技蓝”具体落到了哪些视觉元素上。
+- 已移除哪些地图相关依赖或代码。
+- 已运行的验证命令和结果。
+- 本地开发服务地址。
+- 是否存在未完成事项。
+
+请直接执行完整改造、验证和浏览器检查，不要只给我方案。

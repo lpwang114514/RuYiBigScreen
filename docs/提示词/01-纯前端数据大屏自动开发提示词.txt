@@ -1,0 +1,218 @@
+你是一个资深前端工程师和数据大屏专家。
+
+请你为我开发一个纯前端数据可视化大屏项目。
+
+项目英文名：RuyiBigScreen
+项目中文名：如意数据大屏
+
+项目定位：
+这是一个公开开源的教学型数据大屏项目，主要用于帮助学生和初学者从 0 到 1 学习如何自己动手制作一个数据可视化大屏。
+
+技术架构要求：
+请使用以下技术栈：
+
+- Vue 3
+- Vite
+- TypeScript
+- ECharts
+- Pinia
+- Axios
+- MSW 或等价 mock 方案
+- Vitest
+- Playwright
+- ESLint
+- Prettier
+- Stylelint
+
+核心要求：
+1. 当前阶段只实现纯前端。
+2. 数据必须使用 mock 数据。
+3. 后期必须可以平滑切换到真实 API。
+4. 不能把所有代码堆在一个文件中。
+5. 必须遵循模块化开发规范。
+6. 必须包含测试系统。
+7. 必须包含日志系统。
+8. 必须包含代码质量系统。
+9. 页面必须是一个完整、美观、可展示的数据可视化大屏。
+10. 最后必须自动启动本地开发服务，并打开浏览器让我看到页面。
+
+项目目录建议：
+
+src/
+  app/
+    App.vue
+    main.ts
+  assets/
+  components/
+    BasePanel.vue
+    MetricCard.vue
+    ScreenHeader.vue
+  charts/
+    LineTrendChart.vue
+    BarRankingChart.vue
+    PieStatusChart.vue
+    RadarAbilityChart.vue
+    MapOverviewChart.vue
+  views/
+    DashboardView.vue
+  layouts/
+    BigScreenLayout.vue
+  services/
+    http.ts
+    dashboardService.ts
+    dataSource.ts
+  mocks/
+    browser.ts
+    handlers.ts
+    dashboardMock.ts
+  stores/
+    dashboardStore.ts
+  utils/
+    format.ts
+    resize.ts
+  logs/
+    logger.ts
+  types/
+    dashboard.ts
+  tests/
+    unit/
+    e2e/
+
+页面设计要求：
+请实现一个 1920x1080 风格的数据大屏页面，能够自适应浏览器窗口。
+
+页面主题：
+科技感、深色背景、蓝青色视觉风格，但不要只使用单一颜色。整体要专业、清晰、适合教学演示。
+
+页面内容建议：
+- 顶部标题：如意数据大屏 RuyiBigScreen
+- 当前时间
+- 核心指标卡片，例如：
+  - 今日访问量
+  - 实时订单数
+  - 活跃用户数
+  - 系统健康度
+- 中间区域：
+  - 地图或中心态势总览图
+- 左侧区域：
+  - 访问趋势折线图
+  - 分类占比饼图
+- 右侧区域：
+  - 城市排名柱状图
+  - 能力雷达图
+- 底部区域：
+  - 实时动态列表或告警列表
+
+数据要求：
+请创建 mock 数据，不要写死在组件里。
+
+mock 数据应该包含：
+- summary metrics
+- trend data
+- category distribution
+- ranking data
+- radar data
+- activity list
+
+数据访问规范：
+页面组件不能直接读取 mock 文件。
+必须通过 services 层获取数据。
+
+请实现统一的数据源切换机制：
+
+- 当环境变量 VITE_DATA_SOURCE=mock 时，使用 mock 数据。
+- 当环境变量 VITE_DATA_SOURCE=api 时，预留 Axios API 请求逻辑。
+- 当前默认使用 mock。
+
+日志系统要求：
+请创建 logs/logger.ts。
+
+logger 至少支持：
+- info
+- warn
+- error
+- debug
+
+开发环境可以输出到 console。
+后续应方便接入 Sentry 或其他日志平台。
+
+测试要求：
+请至少完成以下测试：
+
+1. 单元测试：
+   - 测试格式化工具函数
+   - 测试 dashboardService 在 mock 模式下能返回数据
+
+2. E2E 测试：
+   - 使用 Playwright 打开首页
+   - 验证页面标题存在
+   - 验证至少一个核心指标卡片存在
+   - 验证至少一个图表容器存在
+
+代码质量要求：
+请配置：
+
+- ESLint
+- Prettier
+- Stylelint
+- TypeScript strict mode
+- lint 脚本
+- format 脚本
+- test 脚本
+- e2e 脚本
+- build 脚本
+
+package.json scripts 至少包含：
+
+- dev
+- build
+- preview
+- lint
+- format
+- test
+- test:e2e
+
+开发步骤要求：
+请按以下步骤执行：
+
+1. 检查当前目录和 Git 状态。
+2. 如果项目目录不存在，则创建项目。
+3. 使用 Vite 创建 Vue3 + TypeScript 项目。
+4. 安装必要依赖。
+5. 按模块化目录结构整理代码。
+6. 实现 mock 数据。
+7. 实现 services 数据访问层。
+8. 实现日志系统。
+9. 实现大屏布局和图表组件。
+10. 实现单元测试和 E2E 测试。
+11. 配置 ESLint、Prettier、Stylelint。
+12. 运行 lint。
+13. 运行 unit test。
+14. 运行 build。
+15. 启动本地开发服务器。
+16. 自动打开浏览器访问页面。
+17. 如果页面显示异常，请修复后重新验证。
+
+浏览器验证要求：
+必须实际打开浏览器查看页面，而不是只告诉我“可以运行”。
+
+请使用 Playwright 或系统浏览器自动打开页面。
+打开后请检查：
+- 页面不是空白
+- 标题显示正确
+- 指标卡片显示正常
+- 图表正常渲染
+- 页面没有明显布局重叠
+- 控制台没有严重错误
+
+最终交付说明：
+完成后请告诉我：
+
+- 本地项目路径
+- 启动命令
+- 浏览器访问地址
+- 已完成的功能
+- 已运行的验证命令
+- 是否存在未完成事项
+
+请直接执行，不要只给我方案。

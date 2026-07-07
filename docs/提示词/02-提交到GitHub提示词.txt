@@ -1,0 +1,201 @@
+你是一个资深 Git 工程师、开源项目维护者和发布流程专家。
+
+请你帮我把当前项目 RuyiBigScreen 提交到 GitHub。
+
+项目英文名：RuyiBigScreen
+项目中文名：如意数据大屏
+
+项目定位：
+这是一个公开开源的教学型数据大屏项目，主要用于帮助学生和初学者从 0 到 1 学习如何自己动手制作一个数据可视化大屏。
+
+本次任务目标：
+将当前本地项目中应该提交的内容提交到 Git 仓库，并推送到 GitHub。
+
+请直接执行，不要只给我方案。
+
+核心原则：
+1. 该提交的提交。
+2. 该推送的推送。
+3. 该忽略的忽略。
+4. 不要把依赖、构建产物、日志、缓存、测试临时文件、系统文件提交到仓库。
+5. 不要删除用户已有文件。
+6. 不要使用 git reset --hard、git checkout -- . 这类破坏性命令。
+7. 如果发现已有远程仓库，优先复用已有 origin。
+8. 如果没有远程仓库，需要检查 GitHub CLI 登录状态，并创建 GitHub 仓库。
+9. 如果项目定位是公开开源项目，默认创建 public 仓库；除非用户明确要求 private。
+10. 提交前必须运行必要验证，推送后必须确认远程状态。
+
+请先检查：
+
+1. 当前目录路径。
+2. 当前 Git 状态。
+3. 当前分支。
+4. 是否存在远程仓库 origin。
+5. 是否已经有 GitHub 仓库。
+6. `.gitignore` 是否合理。
+7. 是否有不应该提交的文件。
+
+必须忽略的内容包括但不限于：
+
+- node_modules/
+- dist/
+- dist-ssr/
+- coverage/
+- test-results/
+- playwright-report/
+- *.log
+- .env
+- .env.local
+- .env.*.local
+- .DS_Store
+- Thumbs.db
+- 临时目录
+- 本地 IDE 缓存
+
+需要重点确认：
+
+1. `src/logs/logger.ts` 这样的源码日志模块应该被提交。
+2. 根目录运行日志文件不应该被提交。
+3. `public/mockServiceWorker.js` 是 MSW 必需文件，应该提交。
+4. `package.json` 和 `package-lock.json` 应该提交。
+5. `README.md`、`LICENSE`、`docs/`、配置文件、测试文件、源码文件都应该提交。
+6. `node_modules/`、`dist/`、`test-results/`、`*.log` 不应该提交。
+
+提交前请运行验证命令：
+
+```bash
+npm run lint
+npm run test
+npm run build
+```
+
+如果 E2E 环境可用，也请运行：
+
+```bash
+npm run test:e2e
+```
+
+如果验证失败：
+
+1. 先阅读错误原因。
+2. 只做必要修复。
+3. 修复后重新运行失败的验证命令。
+4. 不要绕过 lint、test 或 build。
+
+Git 操作要求：
+
+1. 先执行：
+
+```bash
+git status --short
+git status --short --branch
+git remote -v
+```
+
+2. 检查 `.gitignore`，必要时补充规则。
+
+3. 使用以下命令确认关键文件是否被正确忽略：
+
+```bash
+git check-ignore -v node_modules package-lock.json dist test-results 2>$null
+git check-ignore -v src/logs/logger.ts 2>$null
+```
+
+注意：
+- `node_modules`、`dist`、`test-results` 应该被忽略。
+- `package-lock.json` 不应该被忽略。
+- `src/logs/logger.ts` 不应该被忽略。
+
+4. 查看完整待提交清单：
+
+```bash
+git status --short
+git diff --stat
+```
+
+5. 如果都是本次项目相关文件，可以执行：
+
+```bash
+git add -A
+git status --short
+```
+
+6. 提交信息必须清晰、具体，建议使用中文，例如：
+
+```bash
+git commit -m "初始化如意数据大屏前端项目"
+```
+
+如果本次只是补充 GitHub 提交提示词，可以使用：
+
+```bash
+git commit -m "补充 GitHub 提交流程提示词"
+```
+
+7. 如果没有远程仓库，请先检查 GitHub CLI：
+
+```bash
+gh auth status
+```
+
+如果已登录，并且需要创建公开仓库：
+
+```bash
+gh repo create DaPengRuYi/RuyiBigScreen --public --source . --remote origin --push
+```
+
+如果远程 origin 已存在，则不要重复创建仓库，直接推送当前分支：
+
+```bash
+git push -u origin HEAD
+```
+
+8. 推送后必须验证远程状态：
+
+```bash
+git status --short --branch
+git remote -v
+git ls-remote --heads origin
+```
+
+9. 如果 push 超时，不要立刻重复创建仓库。请先检查远程分支是否已经存在：
+
+```bash
+git ls-remote --heads origin
+```
+
+如果远程分支已经存在，再根据当前分支执行精确推送，例如：
+
+```bash
+git push origin HEAD:main --verbose
+```
+
+或者：
+
+```bash
+git push origin HEAD:master --verbose
+```
+
+请根据实际当前分支名称判断，不要猜测。
+
+PowerShell 注意事项：
+
+如果当前终端是旧版 PowerShell，不要使用 `&&` 串联命令。
+
+请分开执行命令，或者使用 PowerShell 支持的写法。
+
+最终交付说明：
+完成后请告诉我：
+
+- 本地项目路径
+- 当前分支
+- GitHub 仓库地址
+- 本次提交的 commit hash
+- 已推送到哪个远程分支
+- 已运行的验证命令
+- 哪些文件被提交
+- 哪些文件被忽略
+- 当前 `git status --short --branch` 结果
+- 是否存在未完成事项
+
+请直接执行完整提交和推送流程，不要只给我命令。
