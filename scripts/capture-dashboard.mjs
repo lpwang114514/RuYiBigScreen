@@ -41,7 +41,7 @@ async function captureDashboard() {
   }
 
   try {
-    await page.getByRole('heading', { name: /如意数据大屏 RuyiBigScreen/ }).waitFor({
+    await page.getByRole('heading', { name: /神秘数据大屏/ }).waitFor({
       state: 'visible',
       timeout: 15_000,
     })

@@ -7,7 +7,7 @@ function write(level: 'info' | 'warn' | 'error' | 'debug', message: string, meta
   }
 
   const payload = meta ? [message, meta] : [message]
-  console[level](`[RuyiBigScreen] ${level.toUpperCase()}`, ...payload)
+  console[level](`[神秘数据大屏] ${level.toUpperCase()}`, ...payload)
 }
 
 export const logger: Record<'info' | 'warn' | 'error' | 'debug', LogMethod> = {

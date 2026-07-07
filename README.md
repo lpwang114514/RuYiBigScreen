@@ -1,10 +1,10 @@
-# RuyiBigScreen｜如意数据大屏
+# ShenmiDataScreen｜神秘数据大屏
 
-RuyiBigScreen 是一个教学型数据可视化大屏项目，用 Vue 3、TypeScript 和 ECharts 演示一个完整前端大屏从页面布局、mock 数据、状态管理到自动化验证的基本工程结构。
+神秘数据大屏 是一个教学型数据可视化大屏项目，用 Vue 3、TypeScript 和 ECharts 演示一个完整前端大屏从页面布局、mock 数据、状态管理到自动化验证的基本工程结构。
 
 ## 项目预览
 
-![如意数据大屏](docs/screenshots/dashboard-1920x1080.png)
+![神秘数据大屏](docs/screenshots/dashboard-1920x1080.png)
 
 ## 项目简介
 
@@ -38,7 +38,7 @@ RuyiBigScreen 是一个教学型数据可视化大屏项目，用 Vue 3、TypeSc
 
 ## 页面内容
 
-- 顶部标题与当前时间：展示“如意数据大屏 RuyiBigScreen”和实时钟表。
+- 顶部标题与当前时间：展示“神秘数据大屏”和实时钟表。
 - 核心指标卡片：今日访问量、实时订单数、活跃用户数、系统健康度。
 - 访问趋势：展示访问量和订单数的滑动趋势窗口。
 - 分类占比：展示课程学习、项目实战、资料下载等分类占比。

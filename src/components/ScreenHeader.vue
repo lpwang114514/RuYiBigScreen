@@ -5,7 +5,7 @@
       <strong>Vue 3 + ECharts</strong>
     </div>
     <div class="screen-header__title">
-      <h1>如意数据大屏 RuyiBigScreen</h1>
+      <h1>神秘数据大屏</h1>
       <p>Mock Data Visualization Teaching Dashboard</p>
     </div>
     <time

@@ -13,7 +13,7 @@ async function bootstrap() {
   app.use(createPinia())
   app.mount('#app')
 
-  logger.info('RuyiBigScreen app mounted', {
+  logger.info('神秘数据大屏 app mounted', {
     dataSource: import.meta.env.VITE_DATA_SOURCE ?? 'mock',
   })
 }

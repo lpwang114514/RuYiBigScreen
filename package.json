@@ -1,10 +1,11 @@
 {
-  "name": "ruyibigscreen",
+  "name": "shenmi-data-screen",
+  "description": "神秘数据大屏 Vue 3 数据可视化教学大屏",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 10001",
+    "dev": "vite --host 127.0.0.1 --port 10001 --open",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "lint": "run-p lint:eslint lint:style",
